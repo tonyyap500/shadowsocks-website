@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>充值</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+    <!-- fonts -->
+    <link href="http://fonts.googleapis.com/css?family=Muli:300,400" rel="stylesheet">
+    <!-- /fonts -->
+    <!-- css -->
+    <link href="css/bootstrap.css" rel="stylesheet" type='text/css' media="all" />
+    <link href="css/style.css" rel="stylesheet" type='text/css' media="all" />
+    <!-- /css -->
+</head>
+<body>
+<h1 class="w3ls">请充值</h1>
+<div class="content-agileits">
+    <form action="#" method="post" data-toggle="validator" role="form" id="register" name="register">
+        <div class="form-group w3 w31">
+            <label for="channel">充值渠道</label>
+            <select class="form-control" id="channel">
+                <option>微信</option>
+                <option>支付宝</option>
+                <option>VISA</option>
+                <option>MASTERCARD</option>
+                <option>PayPal</option>
+            </select>
+        </div>
+
+        <div class="form-group  w3 w3l">
+            <label for="amount" class="control-label">充值金额</label>
+            <input type="text" class="form-control" id="amount" placeholder="请输入充值金额" data-error="请输入充值金额" required>
+            <div class="help-block with-errors"></div>
+        </div>
+
+        <div class="form-group">
+            <button type="button" class="btn btn-primary btn-md" style="margin-left: 5%" id="bt1">1个月</button>
+            <button type="button" class="btn btn-primary btn-md" style="margin-left: 5%" id="bt2">2个月</button>
+            <button type="button" class="btn btn-primary btn-md" style="margin-left: 5%" id="bt3">3个月</button>
+        </div>
+
+        <div>
+            <button type="button" class="btn btn-primary btn-md" style="margin-left: 5%" id="bt4">6个月</button>
+            <button type="button" class="btn btn-primary btn-md" style="margin-left: 5%" id="bt5">1 年&nbsp;&nbsp;&nbsp;</button>
+            <button type="button" class="btn btn-primary btn-md" style="margin-left: 5%" id="bt6">2 年&nbsp;&nbsp;&nbsp;</button>
+        </div>
+
+        <label class="control-label" id="space"></label>
+        <div class="form-group">
+            <button type="submit" class="btn btn-lg" id="submit">提交</button>
+        </div>
+    </form>
+</div>
+
+<!-- js files -->
+<script src="js/jquery-1.10.2.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/validator.min.js"></script>
+<!-- /js files -->
+
+<script>
+    $("document").ready(function () {
+        //reload captcha
+        $("#bt1").click(function () {
+            $("#amount").val(10);
+        });
+        $("#bt2").click(function () {
+            $("#amount").val(20);
+        });
+        $("#bt3").click(function () {
+            $("#amount").val(30);
+        });
+        $("#bt4").click(function () {
+            $("#amount").val(60);
+        });
+        $("#bt5").click(function () {
+            $("#amount").val(120);
+        });
+        $("#bt6").click(function () {
+            $("#amount").val(240);
+        });
+    })
+</script>
+</body>
+</html>

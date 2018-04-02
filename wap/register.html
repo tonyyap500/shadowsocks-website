@@ -5,7 +5,6 @@
     <title>注册</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="keywords" content="Validation Signup Form Responsive, Login form web template,Flat Pricing tables,Flat Drop downs  Sign up Web Templates, Flat Web Templates, Login signup Responsive web template, Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
     <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
     <!-- fonts -->
     <link href="http://fonts.googleapis.com/css?family=Muli:300,400" rel="stylesheet">
@@ -18,7 +17,7 @@
 <body>
 <h1 class="w3ls">请填写以下信息注册</h1>
 <div class="content-agileits">
-    <form action="#" method="post" data-toggle="validator" role="form" name="register">
+    <form action="#" method="post" data-toggle="validator" role="form" id="register" name="register">
         <div class="form-group  w3 w3l">
             <label for="username" class="control-label">用户名</label>
             <input type="text" class="form-control" id="username" placeholder="用户名" data-error="请输入用户名" required>
@@ -44,20 +43,20 @@
         </div>
         <div class="form-group  w3 w3l">
             <label for="username" class="control-label">邀请码</label>
-            <input type="text" class="form-control" id="inviter" placeholder="邀请码" data-error="请输入用户名">
+            <input type="text" class="form-control" id="inviter" placeholder="邀请码(选填)" data-error="">
             <div class="help-block with-errors"></div>
         </div>
 
         <div class="form-group agileits  w3">
             <label for="captcha" class="control-label">验证码</label>
             <div>
-                <input style="float: left" type="text" id="captcha" placeholder="验证码" data-error="请输入验证码" required>
-                <!--<img style="float: right" src="images/captcha.jpg" class="img-responsive" id="captchaImage" alt="点击加载" width="100" height="40">-->
+                <input style="float: left" type="text" id="captcha" placeholder="验证码" data-error="请输入验证码">
                 <img style="float: right" src="http://47.254.202.96:8822/shadowsocks/user/captcha" class="img-responsive" id="captchaImage" alt="点击加载" width="100" height="40">
                 <div class="help-block with-errors"></div>
             </div>
         </div>
 
+        <label for="captcha" class="control-label" id="space"></label>
         <div class="form-group">
             <button type="submit" class="btn btn-lg" id="submit">提交</button>
         </div>
@@ -77,36 +76,41 @@
             $(this).attr("src", src + '?'+ timestamp);
         });
 
-        //register
-//        $("#submit").click(function () {
-//            var username = $("#username").val();
-//            var email = $("#inputEmail").val();
-//            var password = $("#inputPassword").val();
-//            var inviter = $("#inviter").val();
-//            if(inviter == null) {
-//                inviter = 0;
-//            }
-//            var captcha = $("#captcha").val();
-//
-//            $.ajax({
-//                type: "POST",
-//                url: "http://47.254.202.96:8822/shadowsocks/user/register",
-//                contentType: 'application/json',
-//                data: JSON.stringify({
-//                    "username": username,
-//                    "email": email,
-//                    "password": password,
-//                    "inviter": inviter,
-//                    "captcha": captcha
-//                }),
-//                success: function (result) {
-//                    console.log(result);
-//                },
-//                fail: function (result) {
-//                    console.log(result);
-//                }
-//            });
-//        });
+        $("#register").submit(function () {
+            var username = $("#username").val();
+            var email = $("#inputEmail").val();
+            var password = $("#inputPassword").val();
+            var inviter = $("#inviter").val();
+            if(inviter == null) {
+                inviter = 0;
+            }
+            var captcha = $("#captcha").val();
+
+            alert(username);
+            $.ajax({
+                type: "POST",
+                cache:false,
+                async:false,
+                url: "http://47.254.202.96:8822/shadowsocks/user/register",
+                contentType: 'application/json',
+                data: JSON.stringify({
+                    "username": username,
+                    "email": email,
+                    "password": password,
+                    "inviter": inviter,
+                    "captcha": captcha
+                }),
+                success: function (result) {
+                    console.log(result);
+                },
+                fail: function (result) {
+                    console.log(result);
+                }
+            });
+            console.log(username);
+            alert("waiting");
+        });
+
     })
 </script>
 </body>
