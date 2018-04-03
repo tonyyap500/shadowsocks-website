@@ -17,7 +17,7 @@
 <body>
 <h1 class="w3ls">请登录</h1>
 <div class="content-agileits">
-    <form action="#" method="post" data-toggle="validator" role="form" id="register" name="register">
+    <form action="#" method="post" data-toggle="validator" role="form" id="login" name="login">
         <div class="form-group  w3 w3l">
             <label for="username" class="control-label">用户名</label>
             <input type="text" class="form-control" id="username" placeholder="用户名或邮箱" data-error="请输入用户名" required>
@@ -59,6 +59,36 @@
             var timestamp = new Date().getTime();
             var src = "http://47.254.202.96:8822/shadowsocks/user/captcha";
             $(this).attr("src", src + '?'+ timestamp);
+        });
+
+        $("#login").submit(function () {
+            var username = $("#username").val();
+            var password = $("#inputPassword").val();
+            var captcha = $("#captcha").val();
+
+            $.ajax({
+                type: "POST",
+                cache:false,
+                async:false,
+                url: "http://47.254.202.96:8822/shadowsocks/user/login",
+                contentType: 'application/json',
+                xhrFields: {
+                    withCredentials: true
+                },
+                crossDomain: true,
+                data: JSON.stringify({
+                    "username": username,
+                    "password": password
+//                    "captcha": captcha
+                }),
+                success: function (result) {
+                    alert(result.message);
+                    console.log(result);
+                },
+                fail: function (result) {
+                    console.log(result);
+                }
+            });
         });
     })
 </script>

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>登录</title>
+    <title>购买服务器</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
@@ -15,18 +15,18 @@
     <!-- /css -->
 </head>
 <body>
-<h1 class="w3ls">请登录</h1>
+<h1 class="w3ls">购买节点</h1>
 <div class="content-agileits">
 
     <form action="#" method="post" data-toggle="validator" role="form" id="register" name="register">
         <div class="form-group w3 w31">
             <label for="country">国家</label>
             <select class="form-control" id="country">
-                <option>中国</option>
-                <option>美国</option>
-                <option>日本</option>
-                <option>新加坡</option>
-                <option>无可用国家</option>
+                <!--<option>中国</option>-->
+                <!--<option>美国</option>-->
+                <!--<option>日本</option>-->
+                <!--<option>新加坡</option>-->
+                <!--<option>无可用国家</option>-->
             </select>
         </div>
 
@@ -56,11 +56,27 @@
 
 <script>
     $("document").ready(function () {
-        //reload captcha
-        $("#captchaImage").click(function () {
-            var timestamp = new Date().getTime();
-            var src = "http://47.254.202.96:8822/shadowsocks/user/captcha";
-            $(this).attr("src", src + '?'+ timestamp);
+        $.ajax({
+            type: "GET",
+            cache:false,
+            async:false,
+            url: "http://47.254.202.96:8822/shadowsocks/server/countryList",
+            xhrFields: {
+                withCredentials: true
+            },
+            crossDomain: true,
+            success: function (result) {
+                for(var index in result) {
+                    $('#country').append($('<option/>', {
+                        value: result[index].country,
+                        text : result[index].countryInChinese
+                    }));
+                }
+                console.log(result);
+            },
+            fail: function (result) {
+                console.log(result);
+            }
         });
     })
 </script>
