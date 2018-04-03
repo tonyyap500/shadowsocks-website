@@ -1,6 +1,6 @@
 
 <!doctype html>
-<html>
+<html xmlns="http://www.w3.org/1999/html">
 <head>
     <title>注册</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -58,7 +58,7 @@
 
         <label for="captcha" class="control-label" id="space"></label>
         <div class="form-group">
-            <button type="submit" class="btn btn-lg" id="submit">提交</button>
+            <button type="button" class="btn btn-lg" id="submit">提交</button>
         </div>
     </form>
 </div>
@@ -76,21 +76,18 @@
             $(this).attr("src", src + '?'+ timestamp);
         });
 
-        $("#register").submit(function () {
+        $("#submit").click(function () {
             var username = $("#username").val();
             var email = $("#inputEmail").val();
             var password = $("#inputPassword").val();
             var inviter = $("#inviter").val();
-            if(inviter == null) {
-                inviter = 0;
-            }
             var captcha = $("#captcha").val();
 
             $.ajax({
                 type: "POST",
                 cache:false,
                 async:false,
-                url: "http://localhost:8822/shadowsocks/user/register",
+                url: "http://47.254.202.96:8822/shadowsocks/user/register",
                 contentType: 'application/json',
                 xhrFields: {
                     withCredentials: true

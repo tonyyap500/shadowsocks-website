@@ -22,10 +22,6 @@
         <div class="form-group w3 w31">
             <label for="country">国家</label>
             <select class="form-control" id="country">
-                <!--<option>中国</option>-->
-                <!--<option>美国</option>-->
-                <!--<option>日本</option>-->
-                <!--<option>新加坡</option>-->
                 <!--<option>无可用国家</option>-->
             </select>
         </div>
@@ -33,17 +29,13 @@
         <div class="form-group w3 w31">
             <label for="city">城市</label>
             <select class="form-control" id="city">
-                <option>香港</option>
-                <option>台北</option>
-                <option>上海</option>
-                <option>杭州</option>
-                <option>无可用城市</option>
+                <!--<option>无可用城市</option>-->
             </select>
         </div>
 
         <label class="control-label" id="space"></label>
         <div class="form-group">
-            <button type="submit" class="btn btn-lg" id="submit">购买</button>
+            <button type="button" class="btn btn-lg" id="submit">购买</button>
         </div>
     </form>
 </div>
@@ -72,11 +64,65 @@
                         text : result[index].countryInChinese
                     }));
                 }
+                var country = $("#country").val();
+                updateCityList(country);
                 console.log(result);
             },
             fail: function (result) {
                 console.log(result);
             }
+        });
+
+        function updateCityList(country) {
+            $.ajax({
+                type: "GET",
+                cache:false,
+                async:false,
+                url: "http://47.254.202.96:8822/shadowsocks/server/cityList/" + country,
+                xhrFields: {
+                    withCredentials: true
+                },
+                crossDomain: true,
+                success: function (result) {
+                    $("#city").empty();
+                    for(var index in result) {
+                        $('#city').append($('<option/>', {
+                            value: result[index].id,
+                            text : result[index].cityInChinese
+                        }));
+                    }
+                    console.log(result);
+                },
+                fail: function (result) {
+                    console.log(result);
+                }
+            });
+        }
+
+        $("#country").on('change', function () {
+            var country = $(this).val();
+            updateCityList(country);
+        });
+
+        $("#submit").click(function () {
+            var id = $("#city").val();
+            $.ajax({
+                type: "GET",
+                cache:false,
+                async:false,
+                url: "http://47.254.202.96:8822/shadowsocks/server/purchase/" + id,
+                xhrFields: {
+                    withCredentials: true
+                },
+                crossDomain: true,
+                success: function (result) {
+                    alert(result.message);
+                    console.log(result);
+                },
+                fail: function (result) {
+                    console.log(result);
+                }
+            });
         });
     })
 </script>
