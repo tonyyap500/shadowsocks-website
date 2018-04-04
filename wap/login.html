@@ -84,6 +84,7 @@
                 }),
                 success: function (result) {
                     alert(result.message);
+                    $(location).attr("href", "userinfo.html");
                     console.log(result);
                 },
                 fail: function (result) {

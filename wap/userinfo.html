@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>个人中心</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+    <!-- fonts -->
+    <link href="http://fonts.googleapis.com/css?family=Muli:300,400" rel="stylesheet">
+    <!-- /fonts -->
+    <!-- css -->
+    <link href="css/bootstrap.css" rel="stylesheet" type='text/css' media="all" />
+    <link href="css/style.css" rel="stylesheet" type='text/css' media="all" />
+    <!-- /css -->
+</head>
+<body>
+<h1 class="w3ls">个人中心</h1>
+<div class="content-agileits">
+    <div>
+        <p>
+            <span>用户名</span>
+            <span id="username"></span>
+        </p>
+        <p>
+            <span>余额</span>
+            <span id="balance"></span>
+        </p>
+        <p>
+            <span>邮箱</span>
+            <span id="email"></span>
+        </p>
+        <p>
+            <span>登录次数</span>
+            <span id="loginTimes"></span>
+        </p>
+        <p>
+            <span>上次登录时间</span>
+            <span id="lastLoginTime"></span>
+        </p>
+        <p>
+            <span>上次登录ip</span>
+            <span id="lastLoginIp"></span>
+        </p>
+        <a href="reload.html">充值</a>
+        <a href="server.html">购买节点</a>
+    </div>
+</div>
+
+<!-- js files -->
+<script src="js/jquery-1.10.2.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/validator.min.js"></script>
+<!-- /js files -->
+
+<script>
+    $("document").ready(function () {
+        $.ajax({
+            type: "GET",
+            cache:false,
+            async:false,
+            url: "http://47.254.202.96:8822/shadowsocks/user/userCenter",
+            xhrFields: {
+                withCredentials: true
+            },
+            crossDomain: true,
+            success: function (result) {
+                var username = result.username;
+                var email = result.email;
+                var loginTimes = result.loginTimes;
+                var lastLoginTime = result.lastLoginTime;
+                var lastLoginIp = result.lastLoginIp;
+                var balance = result.balance;
+                $("#username").text(username);
+                $("#email").text(email);
+                $("#loginTimes").text(loginTimes);
+                $("#lastLoginTime").text(lastLoginTime);
+                $("#lastLoginIp").text(lastLoginIp);
+                $("#balance").text(balance);
+                console.log(result);
+            },
+            fail: function (result) {
+                console.log(result);
+            }
+        });
+    })
+</script>
+</body>
+</html>

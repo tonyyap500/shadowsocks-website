@@ -40,36 +40,7 @@
 <script>
     $("document").ready(function () {
 
-        $("#submit").click(function () {
-            var username = $("#username").val();
-            var password = $("#inputPassword").val();
-            var captcha = $("#captcha").val();
-
-            $.ajax({
-                type: "POST",
-                cache:false,
-                async:false,
-                url: "http://47.254.202.96:8822/shadowsocks/user/login",
-                contentType: 'application/json',
-                xhrFields: {
-                    withCredentials: true
-                },
-                crossDomain: true,
-                data: JSON.stringify({
-                    "username": username,
-                    "password": password
-//                    "captcha": captcha
-                }),
-                success: function (result) {
-                    alert(result.message);
-                    console.log(result);
-                },
-                fail: function (result) {
-                    console.log(result);
-                }
-            });
-        });
-    })
+    });
 </script>
 </body>
 </html>
