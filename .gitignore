@@ -3,3 +3,5 @@
 log/
 target/
 shadowsocks-backend.iml
+*.zip
+*.exe

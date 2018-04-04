@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>首页</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+    <!-- fonts -->
+    <link href="http://fonts.googleapis.com/css?family=Muli:300,400" rel="stylesheet">
+    <!-- /fonts -->
+    <!-- css -->
+    <link href="css/bootstrap.css" rel="stylesheet" type='text/css' media="all" />
+    <link href="css/style.css" rel="stylesheet" type='text/css' media="all" />
+    <!-- /css -->
+</head>
+<body>
+<h1 class="w3ls">首页</h1>
+<div class="content-agileits">
+    <a href="login.html">登录</a>
+    <br>
+    <br>
+    <a href="register.html">注册</a>
+    <br>
+    <br>
+    <div>
+        <h3>下载</h3>
+        <a href="../Shadowsocks-4.0.9.zip">Windows</a>
+        <br>
+        <a href="../ShadowsocksX-NG.1.7.1.zip">Mac</a>
+    </div>
+</div>
+
+<!-- js files -->
+<script src="js/jquery-1.10.2.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/validator.min.js"></script>
+<!-- /js files -->
+
+<script>
+    $("document").ready(function () {
+
+        $("#submit").click(function () {
+            var username = $("#username").val();
+            var password = $("#inputPassword").val();
+            var captcha = $("#captcha").val();
+
+            $.ajax({
+                type: "POST",
+                cache:false,
+                async:false,
+                url: "http://47.254.202.96:8822/shadowsocks/user/login",
+                contentType: 'application/json',
+                xhrFields: {
+                    withCredentials: true
+                },
+                crossDomain: true,
+                data: JSON.stringify({
+                    "username": username,
+                    "password": password
+//                    "captcha": captcha
+                }),
+                success: function (result) {
+                    alert(result.message);
+                    console.log(result);
+                },
+                fail: function (result) {
+                    console.log(result);
+                }
+            });
+        });
+    })
+</script>
+</body>
+</html>
