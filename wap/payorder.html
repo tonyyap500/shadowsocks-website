@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>查看充值订单</title>
+    <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>订单号</th>
+                <th>充值金额</th>
+                <th>充值方式</th>
+                <th>充值状态</th>
+                <th>创建时间</th>
+                <th>更新时间</th>
+            </tr>
+        </thead>
+
+        <tbody id="tbody">
+        </tbody>
+    </table>
+    <a href="userinfo.html">个人中心</a>
+</body>
+<script>
+    $(document).ready(function () {
+        var tbody = $("#tbody");
+
+        function addRow(id, amount, channel, status, createTime, updateTime) {
+            tbody.append(
+                "<tr> <td>" + id + "</td> <td>" + amount + "</td> <td>" + channel + "</td> <td>" + status + "</td> <td>"+createTime+"</td> <td>"+updateTime+"</td> </tr>"
+            );
+        }
+
+        $.ajax({
+            type: "GET",
+            cache:false,
+            async:false,
+            url: "http://47.254.202.96:8822/shadowsocks/pay/order",
+            xhrFields: {
+                withCredentials: true
+            },
+            crossDomain: true,
+            success: function (result) {
+                for(var index in result) {
+                    var data = result[index];
+                    addRow(
+                        data.transactionId,
+                        data.amount,
+                        data.channel,
+                        data.status,
+                        data.createTime,
+                        data.updateTime
+                    );
+                }
+                console.log(result);
+            },
+            fail: function (result) {
+                console.log(result);
+            }
+        });
+    });
+</script>
+</html>
