@@ -21,11 +21,8 @@
         <div class="form-group w3 w31">
             <label for="channel">充值渠道</label>
             <select class="form-control" id="channel">
-                <option>微信</option>
-                <option>支付宝</option>
-                <option>VISA</option>
-                <option>MASTERCARD</option>
-                <option>PayPal</option>
+                <option value="WECHAT">微信</option>
+                <option value="VISA">VISA</option>
             </select>
         </div>
 
@@ -49,8 +46,9 @@
 
         <label class="control-label" id="space"></label>
         <div class="form-group">
-            <button type="submit" class="btn btn-lg" id="submit">提交</button>
+            <button type="button" class="btn btn-lg" id="submit">提交</button>
         </div>
+        <img style="width: 0; height: 0" src="http://47.254.202.96:8822/shadowsocks/user/captcha" class="img-responsive" id="captchaImage" alt="点击加载" width="100" height="40">
     </form>
 </div>
 
@@ -62,7 +60,9 @@
 
 <script>
     $("document").ready(function () {
-        //reload captcha
+        //default 1 year
+        $("#amount").val(120);
+
         $("#bt1").click(function () {
             $("#amount").val(10);
         });
@@ -80,6 +80,29 @@
         });
         $("#bt6").click(function () {
             $("#amount").val(240);
+        });
+
+        $("#submit").click(function () {
+            var channel = $("#channel").val();
+            var amount = $("#amount").val();
+            $.ajax({
+                type: "GET",
+                cache:false,
+                async:false,
+                url: "http://47.254.202.96:8822/shadowsocks/pay/reload/" + channel + "/" + amount,
+                xhrFields: {
+                    withCredentials: true
+                },
+                crossDomain: true,
+                success: function (result) {
+                    alert(result.message);
+                    var thirdPartyPayURL = result.url;
+                    $(location).attr("href", thirdPartyPayURL);
+                },
+                fail: function (result) {
+                    console.log(result);
+                }
+            });
         });
     })
 </script>
