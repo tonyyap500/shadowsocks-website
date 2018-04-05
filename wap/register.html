@@ -17,7 +17,6 @@
 <body>
 <h1 class="w3ls">请填写以下信息注册</h1>
 <div class="content-agileits">
-    <a href="login.html" style="margin-left: 30%">已有帐号，直接登录</a>
     <form action="#" method="post" data-toggle="validator" role="form" id="register" name="register">
         <div class="form-group  w3 w3l">
             <label for="username" class="control-label">用户名</label>
@@ -61,6 +60,9 @@
         <div class="form-group">
             <button type="button" class="btn btn-lg" id="submit">提交</button>
         </div>
+        <br>
+        <a href="index.html" style="margin-left: 0">返回主页</a>
+        <a href="login.html" style="margin-left: 50px">直接登录</a>
     </form>
 </div>
 <!-- js files -->
@@ -70,6 +72,24 @@
 <!-- /js files -->
 <script>
     $("document").ready(function () {
+        function getUrlParameter(sParam) {
+            var sPageURL = decodeURIComponent(window.location.search.substring(1)),
+                    sURLVariables = sPageURL.split('&'),
+                    sParameterName,
+                    i;
+
+            for (i = 0; i < sURLVariables.length; i++) {
+                sParameterName = sURLVariables[i].split('=');
+
+                if (sParameterName[0] === sParam) {
+                    return sParameterName[1] === undefined ? true : sParameterName[1];
+                }
+            }
+        }
+
+        var inviter = getUrlParameter("inviter");
+        $("#inviter").val(inviter);
+
         //reload captcha
         $("#captchaImage").click(function () {
             var timestamp = new Date().getTime();
@@ -102,8 +122,8 @@
                     "captcha": captcha
                 }),
                 success: function (result) {
-                    //TODO 注册成功后转到登录页面
-                    alert(result.message);
+                    alert("注册成功，请到邮箱激活账户");
+                    $(location).attr("href", "login.html");
                     console.log(result);
                 },
                 fail: function (result) {
