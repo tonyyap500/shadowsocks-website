@@ -14,38 +14,45 @@
     <link href="css/style.css" rel="stylesheet" type='text/css' media="all" />
     <!-- /css -->
 </head>
+<style>
+    .usercenter {
+        color: white;
+    }
+</style>
 <body>
 <h1 class="w3ls">个人中心</h1>
 <div class="content-agileits">
     <div>
-        <p>
-            <span>用户名</span>
-            <span id="username"></span>
-        </p>
-        <p>
-            <span>余额</span>
-            <span id="balance"></span>
-        </p>
-        <p>
-            <span>邮箱</span>
-            <span id="email"></span>
-        </p>
-        <p>
-            <span>登录次数</span>
-            <span id="loginTimes"></span>
-        </p>
-        <p>
-            <span>上次登录时间</span>
-            <span id="lastLoginTime"></span>
-        </p>
-        <p>
-            <span>上次登录ip</span>
-            <span id="lastLoginIp"></span>
-        </p>
-        <a href="reload.html">充值</a>
-        <a href="server.html">购买节点</a>
-        <a href="payorder.html">我的充值订单</a>
-        <a href="myserver.html">我的服务器</a>
+        <table class="table table-bordered">
+            <tbody>
+                <tr>
+                    <td><span class="usercenter">用户名</span></td>
+                    <td><span class="usercenter" id="username"></span></td>
+                </tr>
+                <tr>
+                    <td><span class="usercenter">余额</span></td>
+                    <td><span class="usercenter" id="balance"></span></td>
+                </tr>
+                <tr>
+                    <td><span class="usercenter">邮箱</span></td>
+                    <td><span class="usercenter" id="email"></span></td>
+                </tr>
+                <tr>
+                    <td><span class="usercenter">登录次数</span></td>
+                    <td><span class="usercenter" id="loginTimes"></span></td>
+                </tr>
+                <tr>
+                    <td><span class="usercenter">上次登录</span></td>
+                    <td><span class="usercenter" id="lastLoginTime"></span></td>
+                </tr>
+                <tr>
+                    <td><span class="usercenter" >上次登录IP</span></td>
+                    <td><span class="usercenter" id="lastLoginIp"></span></td>
+                </tr>
+            </tbody>
+        </table>
+        <br>
+        <a href="index.html" style="margin-left: 0">返回主页</a>
     </div>
 </div>
 
