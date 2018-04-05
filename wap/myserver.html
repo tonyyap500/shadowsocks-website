@@ -3,28 +3,36 @@
 <head>
     <meta charset="utf-8">
     <title>我的服务器</title>
-    <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
+    <!--<link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">-->
     <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+    <!-- fonts -->
+    <link href="http://fonts.googleapis.com/css?family=Muli:300,400" rel="stylesheet">
+    <!-- /fonts -->
+    <!-- css -->
+    <link href="css/bootstrap.css" rel="stylesheet" type='text/css' media="all" />
+    <link href="css/style.css" rel="stylesheet" type='text/css' media="all" />
 </head>
-
+<style>
+    td {
+        color: white;
+    }
+</style>
 <body>
-    <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th>地址</th>
-                <th>端口</th>
-                <th>密码</th>
-                <th>加密</th>
-                <th>国家</th>
-                <th>城市</th>
-            </tr>
-        </thead>
+<h1 class="w3ls">我的服务器</h1>
+<div class="content-agileits" >
+        <!--<a href="userinfo.html">个人中心</a>-->
+        <div id="tbody">
 
-        <tbody id="tbody">
-        </tbody>
-    </table>
-    <a href="userinfo.html">个人中心</a>
+        </div>
+        <div>
+            <a style="margin-left: 0" href="index.html">返回首页</a>
+            <a style="margin-left: 50px" href="userinfo.html">个人中心</a>
+        </div>
+</div>
 </body>
 <script>
     $(document).ready(function () {
@@ -32,7 +40,11 @@
 
         function addRow(domain, port, password, encryption, country, city) {
             tbody.append(
-                "<tr> <td>" + domain + "</td> <td>" + port + "</td> <td>" + password + "</td> <td>" + encryption + "</td> <td>"+country+"</td> <td>"+city+"</td> </tr>"
+                    "<p style='color: white'>节点详情</p>" +
+                "<table class='table table-bordered'><tbody><tr><td>地址</td><td>"+domain+"</td></tr><tr><td>端口</td><td>"+port+"</td></tr><tr><td>密码</td><td>"+password+"</td></tr><tr><td>加密</td><td>"+encryption+"</td></tr><tr><td>国家</td><td>"+country+"</td></tr><tr><td>城市</td><td>"+city+"</td></tr></tbody></table>"
+            );
+            tbody.append(
+                "<tr><td></td><td></td></tr>"
             );
         }
 
