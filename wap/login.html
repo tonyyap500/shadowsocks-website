@@ -84,7 +84,10 @@
 //                    "captcha": captcha
                 }),
                 success: function (result) {
-                    $(location).attr("href", "userinfo.html");
+                    if(result.result == 'SUCCESS') {
+                        window.localStorage.setItem("token", result.token);
+                        $(location).attr("href", "userinfo.html");
+                    }
                     console.log(result);
                 },
                 fail: function (result) {

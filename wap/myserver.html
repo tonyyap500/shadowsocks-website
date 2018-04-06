@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>我的服务器</title>
+    <title>我的节点</title>
     <!--<link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">-->
     <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -22,7 +22,7 @@
     }
 </style>
 <body>
-<h1 class="w3ls">我的服务器</h1>
+<h1 class="w3ls">我的节点</h1>
 <div class="content-agileits" >
         <!--<a href="userinfo.html">个人中心</a>-->
         <div id="tbody">
@@ -37,6 +37,7 @@
 <script>
     $(document).ready(function () {
         var tbody = $("#tbody");
+        var token = window.localStorage.getItem("token");
 
         function addRow(domain, port, password, encryption, country, city) {
             tbody.append(
@@ -52,7 +53,10 @@
             type: "GET",
             cache:false,
             async:false,
-            url: "http://47.254.202.96:8822/shadowsocks/server/myServers",
+            url: "http://47.254.202.96:8822/shadowsocks/server/myServers?token=" + token,
+            headers: {
+                "token" : token
+            },
             xhrFields: {
                 withCredentials: true
             },

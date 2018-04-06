@@ -64,11 +64,12 @@
 
 <script>
     $("document").ready(function () {
+        var token = window.localStorage.getItem("token");
         $.ajax({
             type: "GET",
             cache:false,
             async:false,
-            url: "http://47.254.202.96:8822/shadowsocks/user/userCenter",
+            url: "http://47.254.202.96:8822/shadowsocks/user/userCenter?token=" + token,
             xhrFields: {
                 withCredentials: true
             },

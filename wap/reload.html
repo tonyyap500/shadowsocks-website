@@ -89,11 +89,15 @@
         $("#submit").click(function () {
             var channel = $("#channel").val();
             var amount = $("#amount").val();
+            var token = window.localStorage.getItem("token");
             $.ajax({
                 type: "GET",
                 cache:false,
                 async:false,
-                url: "http://47.254.202.96:8822/shadowsocks/pay/reload/" + channel + "/" + amount,
+                url: "http://47.254.202.96:8822/shadowsocks/pay/reload/" + channel + "/" + amount + "?token=" + token,
+                headers: {
+                    "token" : token
+                },
                 xhrFields: {
                     withCredentials: true
                 },

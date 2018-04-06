@@ -44,12 +44,15 @@
 
         $("#submit").click(function () {
             var email = $("#inputEmail").val();
-
+            var token = window.localStorage.getItem("token");
             $.ajax({
                 type: "GET",
                 cache:false,
                 async:false,
-                url: "http://47.254.202.96:8822/shadowsocks/user/invite/" + email,
+                url: "http://47.254.202.96:8822/shadowsocks/user/invite/" + email + "?token=" + token,
+                headers: {
+                    "token" : token
+                },
                 xhrFields: {
                     withCredentials: true
                 },
