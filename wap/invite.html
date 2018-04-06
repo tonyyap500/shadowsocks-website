@@ -41,7 +41,7 @@
 <!-- /js files -->
 <script>
     $("document").ready(function () {
-
+        var domain = window.localStorage.getItem("domain");
         $("#submit").click(function () {
             var email = $("#inputEmail").val();
             var token = window.localStorage.getItem("token");
@@ -49,7 +49,7 @@
                 type: "GET",
                 cache:false,
                 async:false,
-                url: "http://47.254.202.96:8822/shadowsocks/user/invite/" + email + "?token=" + token,
+                url: "http://" + domain + ":8822/shadowsocks/user/invite/" + email + "?token=" + token,
                 headers: {
                     "token" : token
                 },

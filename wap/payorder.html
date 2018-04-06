@@ -37,6 +37,7 @@
     $(document).ready(function () {
         var tbody = $("#tbody");
         var token = window.localStorage.getItem("token");
+        var domain = window.localStorage.getItem("domain");
 
         function addRow(transactionId, amount, channel, status, createTime, updateTime) {
             tbody.append(
@@ -52,7 +53,7 @@
             type: "GET",
             cache:false,
             async:false,
-            url: "http://47.254.202.96:8822/shadowsocks/pay/order?token=" + token,
+            url: "http://" + domain + ":8822/shadowsocks/pay/order?token=" + token,
             headers: {
                 "token" : token
             },

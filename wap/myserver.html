@@ -38,6 +38,7 @@
     $(document).ready(function () {
         var tbody = $("#tbody");
         var token = window.localStorage.getItem("token");
+        var domain = window.localStorage.getItem("domain");
 
         function addRow(domain, port, password, encryption, country, city) {
             tbody.append(
@@ -53,7 +54,7 @@
             type: "GET",
             cache:false,
             async:false,
-            url: "http://47.254.202.96:8822/shadowsocks/server/myServers?token=" + token,
+            url: "http://" + domain + ":8822/shadowsocks/server/myServers?token=" + token,
             headers: {
                 "token" : token
             },
