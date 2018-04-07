@@ -69,8 +69,13 @@
 <!-- /js files -->
 <script>
     $("document").ready(function () {
-//        var domain = "47.254.202.96";
-        var domain = "api.404here.com";
+        var currentDomain = document.domain;
+        var domain;
+        if(currentDomain.match("^www")) {
+            domain = "api" + currentDomain.substr(3, currentDomain.length);
+        }else {
+            domain = "api." + currentDomain;
+        }
         window.localStorage.setItem("domain", domain);
 
         function getUrlParameter(sParam) {
