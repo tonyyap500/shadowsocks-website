@@ -127,8 +127,10 @@
                     "captcha": captcha
                 }),
                 success: function (result) {
-                    alert("注册成功，请到邮箱激活账户");
-                    $(location).attr("href", "login.html");
+                    alert(result.message);
+                    if(result.result == 'SUCCESS') {
+                        $(location).attr("href", "login.html");
+                    }
                     console.log(result);
                 },
                 fail: function (result) {

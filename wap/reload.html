@@ -101,9 +101,12 @@
                 },
                 crossDomain: true,
                 success: function (result) {
-                    alert(result.message);
-                    var thirdPartyPayURL = result.url;
-                    $(location).attr("href", thirdPartyPayURL);
+                    if(result.result == 'SUCCESS') {
+                        var thirdPartyPayURL = result.url;
+                        window.open(thirdPartyPayURL);
+                    }else {
+                        alert(result.message);
+                    }
                 },
                 fail: function (result) {
                     console.log(result);
