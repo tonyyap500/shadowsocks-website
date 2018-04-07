@@ -56,7 +56,7 @@
             type: "GET",
             cache:false,
             async:false,
-            url: "http://" + domain + ":8822/shadowsocks/server/countryList?token=" + token,
+            url: "https://" + domain + "/shadowsocks/server/countryList?token=" + token,
             headers: {
                 "token" : token
             },
@@ -85,7 +85,7 @@
                 type: "GET",
                 cache:false,
                 async:false,
-                url: "http://" + domain + ":8822/shadowsocks/server/cityList/" + country + "?token=" + token,
+                url: "https://" + domain + "/shadowsocks/server/cityList/" + country + "?token=" + token,
                 headers: {
                     "token" : token
                 },
@@ -120,7 +120,7 @@
                 type: "GET",
                 cache:false,
                 async:false,
-                url: "http://" + domain + ":8822/shadowsocks/server/purchase/" + id + "?token=" + token,
+                url: "https://" + domain + "/shadowsocks/server/purchase/" + id + "?token=" + token,
                 headers: {
                     "token" : token
                 },
