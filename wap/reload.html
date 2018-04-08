@@ -103,7 +103,8 @@
                 success: function (result) {
                     if(result.result == 'SUCCESS') {
                         var thirdPartyPayURL = result.url;
-                        window.open(thirdPartyPayURL);
+//                        window.open(thirdPartyPayURL);
+                        window.open("transfer.html");
                     }else {
                         alert(result.message);
                     }
