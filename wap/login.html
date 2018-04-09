@@ -85,6 +85,8 @@
                     if(result.result == 'SUCCESS') {
                         window.localStorage.setItem("token", result.token);
                         $(location).attr("href", "userinfo.html");
+                    }else {
+                        alert(result.message);
                     }
                     console.log(result);
                 },
