@@ -18,8 +18,8 @@
         <div class="form-group w3 w31">
             <label for="channel">充值渠道</label>
             <select class="form-control" id="channel">
-                <option value="WECHAT">微信</option>
-                <option value="VISA">VISA</option>
+                <option value="WECHAT">微信转账</option>
+                <option value="VISA">VISA(暂时不可用)</option>
             </select>
         </div>
 
@@ -48,7 +48,7 @@
         <img style="width: 0; height: 0" src="" class="img-responsive" id="captchaImage" width="100" height="40">
         <div>
             <a style="margin-left: 0" href="index.html">返回首页</a>
-            <a style="margin-left: 50px" href="userinfo.html">个人中心</a>
+            <a style="margin-left: 50px" href="userinfo.html">个人资料</a>
         </div>
     </form>
 </div>
@@ -110,6 +110,7 @@
                     }
                 },
                 fail: function (result) {
+                    $(location).attr("href", "login.html");
                     console.log(result);
                 }
             });

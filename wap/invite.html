@@ -27,7 +27,7 @@
         <br>
         <div>
             <a style="margin-left: 0" href="index.html">返回首页</a>
-            <a style="margin-left: 50px" href="userinfo.html">个人中心</a>
+            <a style="margin-left: 50px" href="userinfo.html">个人资料</a>
         </div>
     </form>
 </div>
@@ -60,6 +60,7 @@
                     console.log(result);
                 },
                 fail: function (result) {
+                    $(location).attr("href", "login.html");
                     console.log(result);
                 }
             });
