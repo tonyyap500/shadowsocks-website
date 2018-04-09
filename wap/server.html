@@ -77,6 +77,12 @@
             },
             fail: function (result) {
                 console.log(result);
+            },
+            error: function (xhr) {
+                if(xhr.status == 0 || xhr.status == '401') {
+                    alert("您还没有登录");
+                    $(location).attr("href", "login.html");
+                }
             }
         });
 
@@ -105,6 +111,12 @@
                 },
                 fail: function (result) {
                     console.log(result);
+                },
+                error: function (xhr) {
+                    if(xhr.status == 0 || xhr.status == '401') {
+                        alert("您还没有登录");
+                        $(location).attr("href", "login.html");
+                    }
                 }
             });
         }
@@ -143,6 +155,7 @@
                 },
                 error: function (xhr) {
                     if(xhr.status == 0 || xhr.status == '401') {
+                        alert("您还没有登录");
                         $(location).attr("href", "login.html");
                     }
                 }
