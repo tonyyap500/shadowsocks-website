@@ -76,6 +76,11 @@
             fail: function (result) {
                 $(location).attr("href", "login.html");
                 console.log(result);
+            },
+            error: function (xhr) {
+                if(xhr.status == 0 || xhr.status == '401') {
+                    $(location).attr("href", "login.html");
+                }
             }
         });
     });

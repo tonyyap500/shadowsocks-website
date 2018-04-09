@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>个人中心</title>
+    <title>个人资料</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
@@ -17,7 +17,7 @@
     }
 </style>
 <body>
-<h1 class="w3ls">个人中心</h1>
+<h1 class="w3ls">个人资料</h1>
 <div class="content-agileits">
     <div>
         <table class="table table-bordered">
@@ -90,6 +90,11 @@
             fail: function (result) {
                 $(location).attr("href", "login.html");
                 console.log(result);
+            },
+            error: function (xhr) {
+                if(xhr.status == 0 || xhr.status == '401') {
+                    $(location).attr("href", "login.html");
+                }
             }
         });
     })
