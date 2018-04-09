@@ -1,0 +1,67 @@
+
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/html">
+<head>
+    <title>重新发送激活邮件</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+    <!-- css -->
+    <link href="css/bootstrap.css" rel="stylesheet" type='text/css' media="all" />
+    <link href="css/style.css" rel="stylesheet" type='text/css' media="all" />
+    <!-- /css -->
+</head>
+<body>
+<h1 class="w3ls">请输入您的邮箱</h1>
+<div class="content-agileits">
+    <form action="#" method="post" data-toggle="validator" role="form" id="register" name="register">
+        <div class="form-group w3l agileinfo wthree w3-agileits">
+            <label for="inputEmail" class="control-label">邮箱</label>
+            <input type="email" class="form-control" id="inputEmail" placeholder="邮箱" data-error="邮箱无效" required>
+            <div class="help-block with-errors"></div>
+        </div>
+
+        <div class="form-group">
+            <button type="button" class="btn btn-lg" id="submit">提交</button>
+        </div>
+        <br>
+        <div>
+            <a style="margin-left: 0" href="index.html">返回首页</a>
+            <a style="margin-left: 50px" href="userinfo.html">个人中心</a>
+        </div>
+    </form>
+</div>
+<!-- js files -->
+<script src="js/jquery-1.10.2.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/validator.min.js"></script>
+<!-- /js files -->
+<script>
+    $("document").ready(function () {
+        var domain = window.localStorage.getItem("domain");
+        $("#submit").click(function () {
+            var email = $("#inputEmail").val();
+            var token = window.localStorage.getItem("token");
+            $.ajax({
+                type: "GET",
+                cache:true,
+                async:false,
+                url: "https://" + domain + "/shadowsocks/user/resend/" + email,
+                xhrFields: {
+                    withCredentials: true
+                },
+                crossDomain: true,
+
+                success: function (result) {
+                    alert(result.message);
+                    console.log(result);
+                },
+                fail: function (result) {
+                    console.log(result);
+                }
+            });
+        });
+    })
+</script>
+</body>
+</html>
