@@ -65,9 +65,7 @@
                 success: function (result) {
                     if(result.result == 'SUCCESS') {
                         window.localStorage.setItem("adminToken", result.token);
-                        alert("登录成功");
-                        //TODO 跳转到管理中心
-//                        $(location).attr("href", "userinfo.html");
+                        $(location).attr("href", "recharge_order.html");
                     }else {
                         alert(result.message);
                     }

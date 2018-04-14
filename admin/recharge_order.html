@@ -7,10 +7,10 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
     <!-- css -->
-    <link href="css/style.css" rel="stylesheet" type='text/css' media="all" />
-    <link href="css/bootstrap.css" rel="stylesheet" type='text/css' media="all" />
-    <link href="css/recharge_order.css" rel="stylesheet" type='text/css' media="all" />
-    <link href="css/open-iconic-foundation.css" rel="stylesheet" type='text/css' media="all" >
+    <link href="../wap/css/style.css" rel="stylesheet" type='text/css' media="all" />
+    <link href="../wap/css/bootstrap.css" rel="stylesheet" type='text/css' media="all" />
+    <link href="../wap/css/recharge_order.css" rel="stylesheet" type='text/css' media="all" />
+    <link href="../wap/css/open-iconic-foundation.css" rel="stylesheet" type='text/css' media="all" >
     <!-- /css -->
 </head>
 <body>
@@ -101,16 +101,17 @@
 
 <!-- js files -->
 <script src="js/jquery-1.10.2.min.js"></script>
-<script src="js/main.js"></script>
+<script src="js/recharge_order.js"></script>
 <!-- /js files -->
 
 <script>
     $(function () {
         //请求接口
+        var token = window.localStorage.getItem("adminToken");
         var domain = window.localStorage.getItem("domain"),
-            url = "https://" + domain + "/admin/findOrders.html",
+            url = "https://" + domain + "/shadowsocks/admin/findOrders",
             data = {
-                token : '9ac0c8c7a69e37a5d6674fdb8b05ab9c',
+                token : token,
                 start : 0,
                 pageSize : 10,
             };

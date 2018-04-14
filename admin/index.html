@@ -20,6 +20,14 @@
 
 <script>
     $("document").ready(function () {
+        var currentDomain = document.domain;
+        var domain;
+        if(currentDomain.match("^www")) {
+            domain = "api" + currentDomain.substr(3, currentDomain.length);
+        }else {
+            domain = "api." + currentDomain;
+        }
+        window.localStorage.setItem("domain", domain);
         $(location).attr("href", "login.html");
     })
 </script>
