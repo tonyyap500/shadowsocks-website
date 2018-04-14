@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>用户充值订单</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+    <!-- css -->
+    <link href="css/style.css" rel="stylesheet" type='text/css' media="all" />
+    <link href="css/bootstrap.css" rel="stylesheet" type='text/css' media="all" />
+    <link href="css/recharge_order.css" rel="stylesheet" type='text/css' media="all" />
+    <link href="css/open-iconic-foundation.css" rel="stylesheet" type='text/css' media="all" >
+    <!-- /css -->
+</head>
+<body>
+<h1 class="w3ls">用户充值订单</h1>
+<div class="content-agileits recharge-order">
+    <div class="container">
+        <table>
+            <colgroup>
+                <col width="5%">
+                <col width="10%">
+                <col width="10%">
+                <col width="10%">
+                <col width="15%">
+
+                <col width="6%">
+                <col width="15%">
+                <col width="10%">
+                <col >
+                <col width="8%"/>
+            </colgroup>
+            <thead>
+                <tr>
+                    <th>订单ID</th>
+                    <th>交易时间</th>
+                    <th>用户</th>
+                    <th>交易证件</th>
+                    <th>交易渠道</th>
+
+                    <th>金额</th>
+                    <th>更新时间</th>
+                    <th>交易状态</th>
+                    <th>备注</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>12</td>
+                    <td>2018-04-14</td>
+                    <td>Mr. chen</td>
+                    <td>身份证</td>
+                    <td>app iphone</td>
+                    <td class="u-fcy">$ <sapn>90</sapn></td>
+                    <td>2018-04-14 15:34</td>
+                    <td class="stutas success"><span class="fi-circle-check" title="icon name" aria-hidden="true"></span>成功</td>
+                    <td>我是备注</td>
+                    <td class="operation">
+                        <a href="javascript:;" class="pass">通过</a>&nbsp;&nbsp;
+                        <a href="javascript:;" class="cancle">取消</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>12</td>
+                    <td>2018-04-14</td>
+                    <td>Mr. chen</td>
+                    <td>身份证</td>
+                    <td>app iphone</td>
+                    <td class="u-fcy">$ <sapn>90</sapn></td>
+                    <td>2018-04-14 15:34</td>
+                    <td class="stutas fail"><span class="fi-circle-x" title="icon name" aria-hidden="true"></span>失败</td>
+                    <td><div class="remark f-ws" title="我是备注">我是备注</div></td>
+                    <td class="operation">
+                        <a href="javascript:;" class="pass">通过</a>&nbsp;&nbsp;
+                        <a href="javascript:;" class="cancel">取消</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <ul class="pagination float-rt">
+            <li class="page-item">
+                <a class="page-link" href="#" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                    <span class="sr-only">Previous</span>
+                </a>
+            </li>
+            <li class="page-item"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item">
+                <a class="page-link" href="#" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<!-- js files -->
+<script src="js/jquery-1.10.2.min.js"></script>
+<script src="js/main.js"></script>
+<!-- /js files -->
+
+<script>
+    $(function () {
+        //请求接口
+        var domain = window.localStorage.getItem("domain"),
+            url = "https://" + domain + "/admin/findOrders.html",
+            data = {
+                token : '9ac0c8c7a69e37a5d6674fdb8b05ab9c',
+                start : 0,
+                pageSize : 10,
+            };
+        $.http.get(url,data,function (e) {
+            console.log(e)
+        });
+    });
+</script>
+</body>
+</html>

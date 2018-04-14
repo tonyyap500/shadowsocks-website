@@ -1,0 +1,89 @@
+//Data:2018-04-14
+//Athor:630
+//Function:账单列表
+
+.ts(@time){
+  -webkit-transition: all @time ease-in-out;
+  -moz-transition: all @time ease-in-out;
+  -ms-transition: all @time ease-in-out;
+  -o-transition: all @time ease-in-out;
+  transition: all @time ease-in-out;
+}
+
+.content-agileits{
+  color: #fff;
+  width:95%;
+  font-size: 13px;
+}
+table{
+  text-align: center;
+  width:100%;
+}
+thead{
+  border-bottom:1px solid rgba(255, 255, 255, 0.7);
+  line-height: 40px;
+  th{
+    text-align: center;
+    font-size: 14px;
+  }
+}
+tbody{
+  text-align: center;
+  line-height:40px;
+  tr{
+    border-bottom:1px solid rgba(255, 255, 255, 0.3);
+  }
+  .remark{
+    max-width:260px;
+  }
+  .stutas{
+    span{
+      vertical-align: middle;
+      margin-right: 5px;
+    }
+    &.success{
+      color: #6fff90;
+    }
+    &.fail{
+      color: #ff936e;
+    }
+  }
+  .operation{
+    a{
+      color: #8dcaff;
+      .ts(.1s);
+      &:hover{
+        color: #fff;
+        text-decoration: none;
+      }
+    }
+  }
+}
+
+
+//页码
+.pagination{
+  & > li {
+    & > a {
+      position: relative;
+      float: left;
+      padding: 6px 12px;
+      margin-left: -1px;
+      line-height: 1.42857143;
+      color: #fff;
+      text-decoration: none;
+      background-color: rgba(255, 255, 255, 0.2);
+      border: 1px solid #ddd;
+      &:hover{
+        background-color: rgba(255, 255, 255, 0.1);
+        color: #fff;
+      }
+    }
+  }
+}
+
+@media (max-width: 1366px){
+  .content-agileits {
+    width: 95%;
+  }
+}
