@@ -24,7 +24,9 @@
         var domain;
         if(currentDomain.match("^www")) {
             domain = "api" + currentDomain.substr(3, currentDomain.length);
-        }else {
+        } if(currentDomain.match("^admin")) {
+            domain = "api" + currentDomain.substr(5, currentDomain.length);
+        } else {
             domain = "api." + currentDomain;
         }
         window.localStorage.setItem("domain", domain);

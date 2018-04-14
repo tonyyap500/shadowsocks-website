@@ -69,7 +69,7 @@
     $("document").ready(function () {
         var currentDomain = document.domain;
         var domain;
-        if(currentDomain.match("^www")) {
+        if(currentDomain.match("^www") || currentDomain.match("^wap")) {
             domain = "api" + currentDomain.substr(3, currentDomain.length);
         }else {
             domain = "api." + currentDomain;
