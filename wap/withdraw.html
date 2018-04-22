@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>提现</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+    <!-- css -->
+    <link href="css/style.css" rel="stylesheet" type='text/css' media="all" />
+    <link href="css/withdraw.css" rel="stylesheet" type='text/css' media="all" />
+    <!-- /css -->
+</head>
+<body>
+<h1 class="w3ls">提现</h1>
+<div class="content-agileits withdraw">
+    <form action="" id="withdraw_app_form">
+        <div class='withdraw-item account show'>
+            <!-- show 不加：未添加 状态，加：有账户的状态； -->
+            <div class="tit">收款账户</div>
+            <!--<input type="button" class="btn withdraw_app_set withdraw_app_set1" value="现在去设置">-->
+            <!--<input name="conti" type="text" class="txt-w300 txt-h36 u-br3 conti" value="姓名  |  账户" disabled>-->
+            <input name="conti" type="text" class="txt-w300 txt-h36 u-br3 conti" placeholder="姓名  |  账户">
+        </div>
+        <div class="withdraw-item money u-mt4">
+            <div class="tit">
+                提现金额
+                <b class="tit-desc">&nbsp;&nbsp;可提现金额：￥<i>498710.02</i></b>
+                <b class="tit-btn u-fcf">全部提现</b>
+            </div>
+            <input name="amount" type="number" class="txt-w200 txt-h36 u-br3 amount" value="" id="cash_txt">
+            <span class="u-fc9">&nbsp;&nbsp;元</span>
+            <p class="tips-words"></p>
+        </div>
+
+        <div class="m-ft cb u-mt6 dib">
+            <a class="u-btn-300 u-btn-bggn u-br3" id="tj">提交申请</a>
+            <p class="u-fc9 u-tac u-mt2">工作日48小时内处理完成</p>
+            <p class="u-fc9 u-tac u-mt1 m-ft-tips"></p>
+        </div>
+    </form>
+</div>
+
+<!-- js files -->
+<script src="js/jquery-1.10.2.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/validator.min.js"></script>
+<!-- /js files -->
+
+<script>
+    $(function () {
+        /**
+         * 提现
+         **/
+        (function () {
+            var total = $('#withdraw_app_form').find(".tit-desc i").text(),
+                new_money = '';
+            $(".withdraw_app_set1").on("click",function () {
+                switchTab(2)
+            });
+
+
+            //获取 输入val
+            $('#cash_txt').bind('input propertychange', function(e) {
+                new_money = $(this).val();
+
+                if(parseFloat(new_money) >= 50 && parseFloat(new_money) < parseFloat(total)){
+                    $('#tj').removeClass('u-btn-bggn').addClass('u-btn-bgf');
+                    $('.tips-words').hide().html('');
+                    click_btn();
+                } else {
+                    $('.tips-words').show().addClass('error').removeClass('service-charge');
+                    $('#tj').removeClass('u-btn-bgf').addClass('u-btn-bggn').off('click');
+
+                    if(parseFloat(new_money) < 50){
+                        $('.tips-words').html('提现金额不得低于￥50');
+                    } else if(parseFloat(new_money) > parseFloat(total)) {
+                        $('.tips-words').html('您输入的金额大于可提现金额');
+                    } else {
+                        $('.tips-words').hide().html('');
+                    }
+                }
+
+
+            });
+
+
+            //点击全部提现
+            $(".withdraw-item.money .tit-btn").on('click',function () {
+                new_money = total;
+                $('#cash_txt').val(new_money);
+                if(parseFloat(total) != 0){
+                    $('#tj').removeClass('u-btn-bggn').addClass('u-btn-bgf');
+                    click_btn();
+                } else {
+                    $('.tips-words').show().addClass('error').removeClass('service-charge').html('提现金额不得低于￥50');
+                }
+            });
+
+
+
+            //保留两位小数
+            //制保留2位小数，如：2，会在2后面补上00.即2.00
+            function toDecimal(x) {
+                var f = parseFloat(x);
+                if (isNaN(f)) {
+                    return false;
+                }
+                var f = Math.round(x*100)/100;
+                var s = f.toString();
+                var rs = s.indexOf('.');
+                if (rs < 0) {
+                    rs = s.length;
+                    s += '.';
+                }
+                while (s.length <= rs + 2) {
+                    s += '0';
+                }
+                return s;
+            }
+
+            //点击 提交申请 按钮
+            function click_btn() {
+                $("#tj").on('click',function(e){
+                    e.stopPropagation();
+                    var $this = $(this);
+                    tj($this);
+                });
+            }
+
+
+            //请求接口
+            function tj($this){
+                $(".error-tips").remove();
+                var data = {},
+                    amount = trim($(".withdraw-item.money .amount").val());
+
+                if($(".conti").val() == ''){
+                    $this.parents("#withdraw_app_form").find("input[name=conti]").parent().append("<p class='error-tips'>请设置提现账户</p>");
+                    $('.tips-words').hide();
+                    return false;
+                } else if(amount < 50){
+                    $('.tips-words').html('提现金额不得低于￥50');
+                    return false;
+                } else if($.tool.verify(amount,'money')){
+                    data['amount'] = amount;
+
+                    if($this.text() == $.determine.loadingTxt) return ;
+                    $this.text($.determine.loadingTxt);
+
+                    $.http.post('',data,function(d){
+                        $("p.error-tips").remove();
+                        if(d.code==200){
+                            $(".withdraw-item.money .amount").val('');
+                            $('.m-ft-tips').html("已成功提交申请，请耐心等候！");
+                            $('.determine').off().on('click',function(e){
+                                window.location.reload()
+                                e.stopPropagation();
+                            })
+                        }else{
+                            $('.m-ft-tips').html("提现失败！");
+                        }
+                        $this.text('提交申请');
+                    });
+                } else {
+                    $this.parents("#withdraw_app_form").find("input[name=amount]").parent().append("<p class='error-tips'>金额格式不正确</p>");
+                    return false;
+                }
+            }
+        })();
+
+
+        function trim(str) {  // 去空
+            return str.replace(/\s/g, "");
+        }
+        function mScroll(n) { // 回滚
+            $("html,body").stop(true);
+            $("html,body").animate({scrollTop: $(n).offset().top - 100}, 300);
+        }
+    })
+</script>
+</body>
+</html>

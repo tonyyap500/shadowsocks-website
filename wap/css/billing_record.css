@@ -1,0 +1,91 @@
+.content-agileits {
+  color: #fff;
+  width: 95%;
+  font-size: 13px;
+}
+table {
+  text-align: center;
+  width: 100%;
+  color: #fff;
+}
+thead {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.7);
+  line-height: 40px;
+}
+thead th {
+  color: #fff;
+  text-align: center;
+  font-size: 14px;
+}
+tbody {
+  text-align: center;
+  line-height: 20px;
+}
+tbody tr {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+}
+tbody td {
+  padding: 15px 0;
+  vertical-align: middle;
+}
+tbody .remark {
+  max-width: 260px;
+}
+tbody .stutas span {
+  vertical-align: middle;
+  margin-right: 5px;
+}
+tbody .stutas.success {
+  color: #6fff90;
+}
+tbody .stutas.fail {
+  color: #ff936e;
+}
+tbody .operation a {
+  color: #8dcaff;
+  -webkit-transition: all 0.1s ease-in-out;
+  -moz-transition: all 0.1s ease-in-out;
+  -ms-transition: all 0.1s ease-in-out;
+  -o-transition: all 0.1s ease-in-out;
+  transition: all 0.1s ease-in-out;
+}
+.bill-money {
+  height: 145px;
+}
+.bill-money .tit {
+  display: block;
+  margin-top: 60px;
+  font-size: 14px;
+  line-height: 14px;
+  color: #999;
+}
+.bill-money .num {
+  margin-top: 16px;
+  font-size: 30px;
+  line-height: 30px;
+}
+.bill-money .btn {
+  margin-top: 70px;
+  display: inline-block;
+}
+.bill-money .money-item {
+  float: left;
+  width: 255px;
+}
+.bill-table-tit {
+  margin-top: 35px;
+  margin-bottom: 20px;
+  height: 36px;
+  line-height: 36px;
+}
+.bill-table-tit .med-ct-tit {
+  line-height: 36px;
+}
+.bill-record {
+  padding-bottom: 80px;
+}
+@media (max-width: 1366px) {
+  .content-agileits {
+    width: 95%;
+  }
+}
