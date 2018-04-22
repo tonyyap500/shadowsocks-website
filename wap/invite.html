@@ -2,7 +2,7 @@
 <!doctype html>
 <html xmlns="http://www.w3.org/1999/html">
 <head>
-    <title>注册</title>
+    <title>邀请好友</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
@@ -16,13 +16,19 @@
 <div class="content-agileits">
     <form action="#" method="post" data-toggle="validator" role="form" id="register" name="register">
         <div class="form-group w3l agileinfo wthree w3-agileits">
-            <label for="inputEmail" class="control-label">好友邮箱</label>
+            <label for="inputEmail" class="control-label">请输入邮箱并点击发送邮件或直接复制邀请链接</label>
             <input type="email" class="form-control" id="inputEmail" placeholder="邮箱" data-error="邮箱无效" required>
             <div class="help-block with-errors"></div>
         </div>
 
+        <input type="text" hidden value="Hello World" id="inviteURL">
+
         <div class="form-group">
-            <button type="button" class="btn btn-lg" id="submit">提交</button>
+            <button type="button" class="btn btn-lg" id="submit">发送邮件</button>
+        </div>
+
+        <div class="form-group">
+            <button type="button" class="btn btn-lg" id="copyURL">复制邀请链接</button>
         </div>
         <br>
         <div>
@@ -39,9 +45,54 @@
 <script>
     $("document").ready(function () {
         var domain = window.localStorage.getItem("domain");
+        var token = window.localStorage.getItem("token");
+
+        function copyToClipboard(element) {
+            var $temp = $("<input>");
+            $("body").append($temp);
+            $temp.val($(element).text()).select();
+            document.execCommand("copy");
+            $temp.remove();
+        }
+
+        //复制链接
+        $("#copyURL").click(function () {
+            var inviteURL = $("#inviteURL");
+            $.ajax({
+                type: "GET",
+                cache:false,
+                async:false,
+                url: "https://" + domain + "/shadowsocks/user/invite?token=" + token,
+                headers: {
+                    "token" : token
+                },
+                xhrFields: {
+                    withCredentials: true
+                },
+                crossDomain: true,
+
+                success: function (result) {
+                    inviteURL.val(result.message);
+                    copyToClipboard(inviteURL);
+                    alert("已将邀请链接复制到剪切板");
+                    console.log(result);
+                },
+                fail: function (result) {
+                    $(location).attr("href", "login.html");
+                    console.log(result);
+                },
+                error: function (xhr) {
+                    if(xhr.status == 0 || xhr.status == '401') {
+                        alert("您还没有登录");
+                        $(location).attr("href", "login.html");
+                    }
+                }
+            });
+        });
+
+        //发送邮件
         $("#submit").click(function () {
             var email = $("#inputEmail").val();
-            var token = window.localStorage.getItem("token");
             $.ajax({
                 type: "GET",
                 cache:false,
