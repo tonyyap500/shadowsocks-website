@@ -5,10 +5,20 @@
 .withdraw{
   position: relative;
   color: #fff;
+  form{
+    text-align: center;
+  }
 }
 .withdraw-item{
+  width: 328px;
+  margin-left: auto;
+  margin-right: auto;
+  input[name=amount]{
+    //margin-left: 28px;
+  }
   input[name=amount],
   input[name=password]{
+    float: left;
     width: 256px !important;
   }
   input[name=password]{
@@ -22,6 +32,7 @@
   margin-bottom: 20px;
   font-size: 18px;
   line-height: 18px;
+  text-align: left;
 }
 .withdraw-item.account .btn {
   width: 110px;
@@ -45,6 +56,9 @@
 .withdraw-item.account .desc {
   line-height: 26px;
   color: #bdbdbd;
+}
+.withdraw-item.account.show .conti {
+  float: left;
 }
 .withdraw-item.account.show .tit-btn,
 .withdraw-item.account.show .conti {
@@ -123,6 +137,7 @@
 .u-btn-300{
   margin:0 auto;
 }
+
 
 @media screen and (max-width: 760px){
   .withdraw-item .tit{

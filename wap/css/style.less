@@ -432,3 +432,20 @@ p.copyright-w3ls {
 .error-tips{
 	font-size: 12px;
 }
+
+.cb{
+	&:before,
+	&:after{
+		content:'';
+		height: 0;
+		clear: both;
+		display: block;
+		overflow: hidden;
+		visibility: hidden;
+	}
+}
+@media screen and (max-width: 760px){
+	.content-agileits{
+		padding:10px;
+	}
+}

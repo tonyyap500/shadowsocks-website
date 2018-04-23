@@ -2,15 +2,12 @@
   color: #fff;
   width: 90%;
   font-size: 13px;
-  min-width: 980px;
 }
 table {
   text-align: center;
   width: 100%;
   color: #fff;
-}
-table.med-table-bill {
-  min-width: 980px;
+  border: 1px solid rgba(255, 255, 255, 0.7);
 }
 thead {
   border-bottom: 1px solid rgba(255, 255, 255, 0.7);
@@ -31,6 +28,9 @@ tbody tr {
 tbody td {
   padding: 15px 0;
   vertical-align: middle;
+}
+tbody td:nth-child(1) {
+  border-right: 1px solid rgba(255, 255, 255, 0.3);
 }
 tbody .remark {
   max-width: 260px;
@@ -54,7 +54,7 @@ tbody .operation a {
   transition: all 0.1s ease-in-out;
 }
 .bill-money {
-  height: 145px;
+  min-height: 145px;
 }
 .bill-money .tit {
   display: block;
@@ -90,6 +90,6 @@ tbody .operation a {
 }
 @media (max-width: 1366px) {
   .content-agileits {
-    width: 90%;
+    width: 85%;
   }
 }
