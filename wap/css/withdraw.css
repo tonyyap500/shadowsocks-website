@@ -2,6 +2,15 @@
   position: relative;
   color: #fff;
 }
+.withdraw-item input[name=amount],
+.withdraw-item input[name=password] {
+  width: 256px !important;
+}
+.withdraw-item input[name=password] {
+  height: 18px !important;
+  background-color: #fff !important;
+  color: #333 !important;
+}
 .withdraw-item .tit {
   display: block;
   margin-bottom: 20px;
@@ -86,18 +95,26 @@
   text-shadow: 0 0 5px rgba(255, 136, 0, 0.2);
 }
 .txt-h36 {
-  padding: 8px 10px;
-  font-size: 14px;
-  line-height: 18px;
-  border: 1px solid #dbdbdb;
-  border-radius: 3px;
+  padding: 8px 10px !important;
+  font-size: 14px !important;
+  line-height: 18px !important;
+  border: 1px solid #dbdbdb !important;
+  border-radius: 3px !important;
 }
 .txt-w300 {
-  width: 278px;
+  width: 278px !important;
+}
+.txt-w200 {
+  width: 178px !important;
 }
 .m-ft p {
   font-size: 12px;
 }
 .u-btn-300 {
   margin: 0 auto;
+}
+@media screen and (max-width: 760px) {
+  .withdraw-item .tit {
+    font-size: 16px;
+  }
 }

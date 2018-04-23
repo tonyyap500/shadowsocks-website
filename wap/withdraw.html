@@ -18,9 +18,11 @@
         <div class='withdraw-item account show'>
             <!-- show 不加：未添加 状态，加：有账户的状态； -->
             <div class="tit">收款账户</div>
-            <!--<input type="button" class="btn withdraw_app_set withdraw_app_set1" value="现在去设置">-->
-            <!--<input name="conti" type="text" class="txt-w300 txt-h36 u-br3 conti" value="姓名  |  账户" disabled>-->
-            <input name="conti" type="text" class="txt-w300 txt-h36 u-br3 conti" placeholder="姓名  |  账户">
+            <select name="conti" id="" class="txt-w300 txt-h36 u-br3 conti">
+                <option value="0">账户1</option>
+                <option value="1">账户2</option>
+                <option value="2">账户3</option>
+            </select>
         </div>
         <div class="withdraw-item money u-mt4">
             <div class="tit">
@@ -28,8 +30,13 @@
                 <b class="tit-desc">&nbsp;&nbsp;可提现金额：￥<i>498710.02</i></b>
                 <b class="tit-btn u-fcf">全部提现</b>
             </div>
-            <input name="amount" type="number" class="txt-w200 txt-h36 u-br3 amount" value="" id="cash_txt">
+            <input name="amount" type="number" class="txt-w300 txt-h36 u-br3 amount" value="" id="cash_txt">
             <span class="u-fc9">&nbsp;&nbsp;元</span>
+            <p class="tips-words"></p>
+        </div>
+        <div class="withdraw-item amount password u-mt4">
+            <div class="tit">提现密码</div>
+            <input name="password" type="password" class="txt-w300 txt-h36 u-br3" value="" id="password">
             <p class="tips-words"></p>
         </div>
 
@@ -133,7 +140,8 @@
             function tj($this){
                 $(".error-tips").remove();
                 var data = {},
-                    amount = trim($(".withdraw-item.money .amount").val());
+                    amount = trim($(".withdraw-item.money .amount").val()),
+                    password = trim($(".withdraw-itemy input[name=password]").val());
 
                 if($(".conti").val() == ''){
                     $this.parents("#withdraw_app_form").find("input[name=conti]").parent().append("<p class='error-tips'>请设置提现账户</p>");
@@ -142,7 +150,10 @@
                 } else if(amount < 50){
                     $('.tips-words').html('提现金额不得低于￥50');
                     return false;
-                } else if($.tool.verify(amount,'money')){
+                } else if(password == ''){
+                    $this.parents("#withdraw_app_form").find("input[name=password]").parent().append("<p class='error-tips'>请输入密码</p>");
+                    $('.tips-words').hide();
+                } if($.tool.verify(amount,'money')){
                     data['amount'] = amount;
 
                     if($this.text() == $.determine.loadingTxt) return ;
