@@ -18,10 +18,8 @@
         <div class='withdraw-item account show cb'>
             <!-- show 不加：未添加 状态，加：有账户的状态； -->
             <div class="tit">收款账户</div>
-            <select name="conti" id="" class="txt-w300 txt-h36 u-br3 conti">
-                <option value="0">账户1</option>
-                <option value="1">账户2</option>
-                <option value="2">账户3</option>
+            <select name="account" class="txt-w300 txt-h36 u-br3 conti" id="account">
+
             </select>
         </div>
 
@@ -30,7 +28,7 @@
         <div class="withdraw-item money u-mt4 cb">
             <div class="tit">
                 提现金额
-                <b class="tit-desc">&nbsp;&nbsp;可提现金额：￥<i>498710.02</i></b>
+                <b class="tit-desc">&nbsp;&nbsp;可用余额：￥<span id="balance">0</span></b>
                 <b class="tit-btn u-fcf">全部提现</b>
             </div>
             <input name="amount" type="number" class="txt-w300 txt-h36 u-br3 amount" value="" id="cash_txt">
@@ -60,6 +58,69 @@
 <!-- /js files -->
 
 <script>
+    $("document").ready(function () {
+        var token = window.localStorage.getItem("token");
+        var domain = window.localStorage.getItem("domain");
+        $.ajax({
+            type: "GET",
+            cache:false,
+            async:false,
+            url: "https://" + domain + "/shadowsocks/withdraw/bankInfo?token=" + token,
+            headers: {
+                "token" : token
+            },
+            xhrFields: {
+                withCredentials: true
+            },
+            crossDomain: true,
+            success: function (result) {
+                $('#account').append($('<option/>', {
+                    value: "ss",
+                    text : result.name + "|" + result.bankCardNo
+                }));
+                console.log(result);
+            },
+            fail: function (result) {
+                console.log(result);
+            },
+            error: function (xhr) {
+                if(xhr.status == 0 || xhr.status == '401') {
+                    alert("您还没有登录");
+                    $(location).attr("href", "login.html");
+                }
+            }
+        });
+
+        $.ajax({
+            type: "GET",
+            cache:false,
+            async:false,
+            url: "https://" + domain + "/shadowsocks/withdraw/checkBalance?token=" + token,
+            headers: {
+                "token" : token
+            },
+            xhrFields: {
+                withCredentials: true
+            },
+            crossDomain: true,
+            success: function (result) {
+                var balance = result;
+                $("#balance").text(balance);
+                console.log(result);
+            },
+            fail: function (result) {
+                console.log(result);
+            },
+            error: function (xhr) {
+                if(xhr.status == 0 || xhr.status == '401') {
+                    alert("您还没有登录");
+                    $(location).attr("href", "login.html");
+                }
+            }
+        });
+    });
+
+
     $(function () {
         /**
          * 提现
