@@ -208,11 +208,10 @@
             });
         }
 
-        updateOrderList(currentPage - 1);
+        updateOrderList(0);
 
         $("#pageList").on('click', '#previousPage', function () {
-            currentPage = currentPage - 1;
-            currentPage = currentPage > 0 ? currentPage : 0;
+            currentPage = (currentPage - 1) > 0 ? (currentPage - 1) : 0;
             var index = currentPage * pageSize;
             updateOrderList(index);
         });
@@ -234,13 +233,15 @@
         tbody.on('click', '.pass', function () {
             var transactionId = $(this).attr('title');
             updateOrder(transactionId, 'FINISHED');
-            updateOrderList(currentPage);
+            var index = (currentPage - 1) * pageSize;
+            updateOrderList(index);
         });
 
         tbody.on('click', '.cancel', function () {
             var transactionId = $(this).attr('title');
             updateOrder(transactionId, 'CANCELLED');
-            updateOrderList(currentPage);
+            var index = (currentPage - 1) * pageSize;
+            updateOrderList(index);
         });
     });
 </script>
