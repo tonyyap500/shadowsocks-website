@@ -14,6 +14,7 @@
 <body>
 <h1 class="w3ls">提现</h1>
 <div class="content-agileits">
+    <a href="bind_bank_card.html">还未绑定银行卡?</a>
     <form action="#" method="post" data-toggle="validator" role="form" id="login" name="login">
         <div class="form-group  w3 w3l">
             <label for="realName" class="control-label">真实姓名</label>
@@ -69,8 +70,14 @@
             },
             crossDomain: true,
             success: function (result) {
-                $("#realName").val(result.name);
-                $("#bankCardNo").val(result.bankCardNo);
+                var realName = $("#realName");
+                var bankCardNo = $("#bankCardNo");
+
+                realName.val(result.name);
+                bankCardNo.val(result.bankCardNo);
+
+                realName.attr("disabled", "disabled");
+                bankCardNo.attr("disabled", "disabled");
                 console.log(result);
             },
             fail: function (result) {
