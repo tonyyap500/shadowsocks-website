@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>用户充值订单</title>
+    <title>用户提现订单</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
@@ -14,9 +14,9 @@
     <!-- /css -->
 </head>
 <body>
-<h1 class="w3ls">用户充值订单</h1>
+<h1 class="w3ls">用户提现订单</h1>
 <div class="content-agileits recharge-order">
-    <a href="withdraw_order.html">提现订单</a>
+    <a href="recharge_order.html">充值订单</a>
     <div class="container">
         <table>
             <colgroup>
@@ -27,19 +27,18 @@
                 <col width="10%">
 
                 <col width="6%">
-                <col width="6%">
-                <col width="17%">
-                <col width="17%"/>
-                <col width="10%"/>
+                <col width="18%">
+                <col width="12%">
+                <col width="12%"/>
+                <col width="8%"/>
             </colgroup>
             <thead>
                 <tr>
-                    <th>订单ID</th>
+                    <th>序号</th>
                     <th>用户ID</th>
                     <th>订单号</th>
                     <th>金额</th>
                     <th>交易渠道</th>
-
                     <th>交易状态</th>
                     <th>备注</th>
                     <th>创建时间</th>
@@ -135,7 +134,7 @@
                 type: "GET",
                 cache:false,
                 async:false,
-                url: "https://" + domain + "/shadowsocks/admin/findOrders?token=" + token + "&start=" + start +"&pageSize=" + pageSize,
+                url: "https://" + domain + "/shadowsocks/admin/findWithdrawOrders?token=" + token + "&start=" + start +"&pageSize=" + pageSize,
                 xhrFields: {
                     withCredentials: true
                 },
@@ -145,7 +144,7 @@
                     tbody.empty();
                     updatePages(total);
 
-                    var list = result.payOrderList;
+                    var list = result.withdrawRecordList;
                     for(var index in list) {
                         var data = list[index];
                         var status = '错误';
@@ -188,7 +187,7 @@
                 type: "GET",
                 cache:false,
                 async:false,
-                url: "https://" + domain + "/shadowsocks/admin/updateOrder?token=" + token + "&transactionId=" + transactionId +"&orderStatus=" + orderStatus,
+                url: "https://" + domain + "/shadowsocks/admin/updateWithdrawOrder?token=" + token + "&transactionId=" + transactionId +"&withdrawStatusEnum=" + orderStatus,
                 xhrFields: {
                     withCredentials: true
                 },
