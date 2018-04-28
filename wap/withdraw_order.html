@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>查看充值订单</title>
+    <title>提现记录</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
@@ -16,7 +16,7 @@
     }
 </style>
 <body>
-<h1 class="w3ls">我的充值订单</h1>
+<h1 class="w3ls">提现记录</h1>
 <div class="content-agileits" >
     <div id="tbody">
 
@@ -36,13 +36,62 @@
         var token = window.localStorage.getItem("token");
         var domain = window.localStorage.getItem("domain");
 
-        function addRow(transactionId, amount, channel, status, createTime, updateTime) {
+        function addRow(id, transactionId, amount, channel, status, remark, createTime, updateTime) {
             tbody.append(
-                    "<p style='color: white'>充值详情</p>" +
-                    "<table class='table table-bordered'><tbody><tr><td>订单号</td><td><abbr "+transactionId+">"+transactionId.substr(0, 10)+"</abbr></td></tr><tr><td>充值金额</td><td>"+amount+"</td></tr><tr><td>充值方式</td><td>"+channel+"</td></tr><tr><td>充值状态</td><td>"+status+"</td></tr><tr><td>创建时间</td><td>"+createTime+"</td></tr><tr><td>完成时间</td><td>"+updateTime+"</td></tr></tbody></table>"
+                "<p style='color: white'>提现记录</p>" +
+                "<table class='table table-bordered'><tbody>"
+                + "<tr><td>"
+                + "序号:"
+                + "</td><td>"
+                + id
+                + "</td></tr>"
+
+                + "<tr><td>"
+                + "订单号:"
+                + "</td><td>"
+                + "<abbr "+transactionId+">"+transactionId.substr(0, 10) + "***" + "</abbr>"
+                + "</td></tr>"
+
+                + "<tr><td>"
+                + "金额:"
+                + "</td><td>"
+                + amount
+                + "</td></tr>"
+
+                + "<tr><td>"
+                + "提现渠道:"
+                + "</td><td>"
+                + channel
+                + "</td></tr>"
+
+                + "<tr><td>"
+                + "状态:"
+                + "</td><td>"
+                + status
+                + "</td></tr>"
+
+                + "<tr><td>"
+                + "备注:"
+                + "</td><td>"
+                + remark
+                + "</td></tr>"
+
+                + "<tr><td>"
+                + "申请时间:"
+                + "</td><td>"
+                + createTime
+                + "</td></tr>"
+
+                + "<tr><td>"
+                + "审核时间:"
+                + "</td><td>"
+                + updateTime
+                + "</td></tr>"
+
+                + "</tbody></table>"
             );
             tbody.append(
-                    "<tr><td></td><td></td></tr>"
+                "<tr><td></td><td></td></tr>"
             );
         }
 
@@ -50,7 +99,7 @@
             type: "GET",
             cache:false,
             async:false,
-            url: "https://" + domain + "/shadowsocks/pay/order?token=" + token,
+            url: "https://" + domain + "/shadowsocks/withdraw/withdrawRecord?token=" + token,
             headers: {
                 "token" : token
             },
@@ -62,10 +111,12 @@
                 for(var index in result) {
                     var data = result[index];
                     addRow(
+                        data.id,
                         data.transactionId,
                         data.amount,
                         data.channel,
                         data.status,
+                        data.remark,
                         data.createTime,
                         data.updateTime
                     );
