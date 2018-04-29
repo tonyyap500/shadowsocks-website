@@ -147,13 +147,13 @@
                     var list = result.withdrawRecordList;
                     for(var index in list) {
                         var data = list[index];
-                        var status = '错误';
+                        var status = '<span style="color: red">错误</span>';
                         if(data.status == 'PENDING') {
-                            status = '待审核';
+                            var status = '<span style="color: red">待审核</span>';
                         }else if(data.status == 'CANCELLED') {
-                            status = '取消';
+                            var status = '<span style="color: green">取消</span>';
                         }else if(data.status == 'FINISHED') {
-                            status = '完成';
+                            var status = '<span style="color: white">完成</span>';
                         }
                         var updateTime = data.updateTime == null ? '等待更新' : data.updateTime;
                         addRow(
