@@ -61,11 +61,30 @@
             success: function (result) {
                 for(var index in result) {
                     var data = result[index];
+                    var channel;
+                    if(data.channel == 'WECHAT') {
+                        channel = "微信充值";
+                    } else if(data.channel = 'PROMOTION') {
+                        channel = "充值优惠";
+                    } else {
+                        channel = data.channel;
+                    }
+
+                    var status;
+                    if(data.status == 'PENDING') {
+                        status = "待审核";
+                    }else if(data.status == 'FINISHED') {
+                        status = "完成";
+                    }else if(data.status == 'CANCELLED') {
+                        status = "取消";
+                    }else {
+                        status = data.status;
+                    }
                     addRow(
                         data.transactionId,
                         data.amount,
-                        data.channel,
-                        data.status,
+                        channel,
+                        status,
                         data.createTime,
                         data.updateTime
                     );
