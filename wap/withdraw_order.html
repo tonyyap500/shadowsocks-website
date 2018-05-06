@@ -110,12 +110,24 @@
             success: function (result) {
                 for(var index in result) {
                     var data = result[index];
+                    var status = '<span style="color: red">错误</span>';
+                    if(data.status == 'PENDING') {
+                        status = '<span style="color: red">待审核</span>';
+                    }else if(data.status == 'CANCELLED') {
+                        status = '<span style="color: green">取消</span>';
+                    }else if(data.status == 'FINISHED') {
+                        status = '<span style="color: white">完成</span>';
+                    }
+                    var channel = '<span style="color: red">错误</span>';
+                    if(data.channel == 'UNION_PAY') {
+                        channel = '<span style="color: white">银联卡</span>';
+                    }
                     addRow(
                         data.id,
                         data.transactionId,
                         data.amount,
-                        data.channel,
-                        data.status,
+                        channel,
+                        status,
                         data.remark,
                         data.createTime,
                         data.updateTime
